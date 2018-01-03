@@ -1,1 +1,1 @@
-I just want to do something special.
+Anagram project as start of something special
