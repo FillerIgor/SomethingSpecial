@@ -3,6 +3,7 @@ package com.example.anagram.services;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -14,7 +15,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@ActiveProfiles("prod")
+@ActiveProfiles("dev")
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class)
 public class StringCheckerServiceTest {
     @Autowired
@@ -32,7 +33,8 @@ public class StringCheckerServiceTest {
     }
 
     @Configuration
-    @Profile("prod")
+    @EnableConfigurationProperties
+//    @Profile("prod")
     static class TestConfig {
         @Bean
         StringCheckerService stringCheckerService() {
