@@ -21,7 +21,7 @@ public class StringCheckerController {
         this.stringCheckerService = stringCheckerService;
     }
 
-    @GetMapping()
+    @GetMapping
     public boolean isStringsAnagram(HttpServletRequest request, @RequestParam String firstString, @RequestParam String secondString) {
         LOGGER.info("Calling" + request.getRequestURL());
         return stringCheckerService.isStringsAnagram(firstString, secondString);
