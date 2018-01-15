@@ -1,4 +1,4 @@
-package com.example.anagram.services;
+package com.example.anagram.unit.services;
 
 import com.example.anagram.models.User;
 import com.example.anagram.repositories.UserRepository;
@@ -37,10 +37,8 @@ public class UserService {
 
     public User findOne(String id) throws ObjectNotFoundException, IOException {
         MongoCollection<Document> users = mongoClient.getDatabase("mongodb").getCollection("users");
-        Document userDocument = Optional.ofNullable(users.find(new Document("id", id)).first()).orElseThrow(() -> {
-            logger.error("User with id: " + id + " is not found");
-            return new ObjectNotFoundException("User with id: " + id + " is not found");
-        });
+        Document userDocument = Optional.ofNullable(users.find(new Document("id", id)).first())
+                .orElseThrow(() -> new ObjectNotFoundException("User with id: " + id + " is not found"));
         return User.getUserFromDocument(userDocument);
     }
 }

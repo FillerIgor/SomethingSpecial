@@ -1,6 +1,6 @@
 package com.example.anagram.controllers;
 
-import com.example.anagram.services.StringCheckerService;
+import com.example.anagram.unit.services.StringCheckerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

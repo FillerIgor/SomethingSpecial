@@ -1,27 +1,24 @@
-package com.example.anagram.services;
+package com.example.anagram.unit.services;
 
-import org.assertj.core.util.Lists;
+import com.example.anagram.AbstractJunitTestClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
-@ActiveProfiles("dev")
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class)
-public class StringCheckerServiceTest {
+public class StringCheckerServiceTest extends AbstractJunitTestClass {
+
     @Autowired
     private StringCheckerService stringCheckerService;
 
@@ -35,15 +32,4 @@ public class StringCheckerServiceTest {
         //then
         assertThat(result).isTrue();
     }
-
-    @Configuration
-    @EnableConfigurationProperties
-//    @Profile("prod")
-    static class TestConfig {
-        @Bean
-        StringCheckerService stringCheckerService() {
-            return new StringCheckerService();
-        }
-    }
-
 }

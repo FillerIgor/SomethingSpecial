@@ -1,10 +1,11 @@
 package com.example.anagram.controllers;
 
 import com.example.anagram.models.User;
-import com.example.anagram.services.UserService;
+import com.example.anagram.unit.services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +23,13 @@ public class UserController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void createUser(@RequestBody User user) throws JsonProcessingException {
         userService.saveOldStyle(user);
     }
 
-    @GetMapping
-    public User getUser(@RequestParam String id) throws ObjectNotFoundException, IOException {
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable String id) throws ObjectNotFoundException, IOException {
         return userService.findOne(id);
     }
 }

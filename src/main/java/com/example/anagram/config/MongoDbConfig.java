@@ -5,14 +5,13 @@ import com.mongodb.MongoClientOptions;
 import com.mongodb.WriteConcern;
 import com.mongodb.client.MongoDatabase;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-
+@Profile({"prod", "dev"})
 public class MongoDbConfig {
     @Value("${spring.data.mongodb.host}")
     private String dbHost;
