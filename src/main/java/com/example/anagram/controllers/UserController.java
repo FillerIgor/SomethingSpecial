@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+
 @RestController
 @RequestMapping(value = "users", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class UserController {
@@ -30,6 +32,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     public User getUser(@PathVariable String id) throws ObjectNotFoundException, IOException {
-        return userService.findOne(id);
+        User user = userService.findOne(id);
+        user.add(linkTo(UserController.class).slash(id).withSelfRel());
+        return user;
     }
 }

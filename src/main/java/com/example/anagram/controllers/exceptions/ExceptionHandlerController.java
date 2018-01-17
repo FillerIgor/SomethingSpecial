@@ -17,7 +17,7 @@ public class ExceptionHandlerController {
     private final static Logger LOGGER = LoggerFactory.getLogger(ExceptionHandlerController.class);
 
     @ExceptionHandler(ObjectNotFoundException.class)
-    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Requsted object with provided id not found")
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Requested object with provided userId not found")
     public String handleObjectNotFoundException(HttpServletRequest request, Exception e) {
         LOGGER.error(e.getMessage());
         return e.getMessage();

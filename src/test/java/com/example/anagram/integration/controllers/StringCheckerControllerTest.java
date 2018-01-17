@@ -34,7 +34,7 @@ public class StringCheckerControllerTest extends AbstractMockMvc {
     }
 
     @Test
-    public void should_return_false_if_anagram() throws Exception {
+    public void should_return_false_if_not_anagram() throws Exception {
         //given
         //when
         mockMvc.perform(MockMvcRequestBuilders.get("/?firstString=rasafety&secondString=fairy tales"))

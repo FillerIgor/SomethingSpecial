@@ -49,7 +49,7 @@ public class UserControllerTest extends AbstractMockMvc {
         String randomUserId = UUID.randomUUID().toString();
         doThrow(ObjectNotFoundException.class).when(userService).findOne(randomUserId);
         //when
-        mockMvc.perform(MockMvcRequestBuilders.get("/users/{id}", randomUserId)).andExpect(status().isNotFound());
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}", randomUserId)).andExpect(status().isNotFound());
         //then
         verify(userService, times(1)).findOne(randomUserId);
     }
