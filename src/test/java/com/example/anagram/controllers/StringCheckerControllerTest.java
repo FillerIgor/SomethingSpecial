@@ -37,7 +37,9 @@ public class StringCheckerControllerTest {
 
     @Test
     public void should_return_true_if_anagram() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/?firstString=rail safety&secondString=fairy tales"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/?firstString=rail safety&secondString=fairy tales")
+                .param("firstString", "rail safety")
+                .param("secondString","fairy tales"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("true"));
     }

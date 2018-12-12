@@ -21,7 +21,7 @@ public class MongoDbConfig {
     @Value("${spring.data.mongodb.database}")
     private String dbName;
     @Value("#{'${application.mongodb.collections}'.split(',')}")
-    private List<String> collectionNames;// = Collections.singletonList("users");
+    private List<String> collectionNames;
 
     @Bean
     public MongoClient mongoClient() {

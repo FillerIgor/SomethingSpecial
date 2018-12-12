@@ -7,27 +7,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import javassist.tools.rmi.ObjectNotFoundException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.Optional;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class UserService {
-    Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository repository;
     private final MongoClient mongoClient;
-
-    @Autowired
-    public UserService(UserRepository repository, MongoClient mongoClient) {
-        this.repository = repository;
-        this.mongoClient = mongoClient;
-    }
 
     public void saveOldStyle(User user) throws JsonProcessingException {
         MongoCollection<Document> users = mongoClient.getDatabase("mongodb").getCollection("users");
@@ -35,11 +28,11 @@ public class UserService {
         users.insertOne(Document.parse(userAsJsonString));
     }
 
-    public User findOne(String id) throws ObjectNotFoundException, IOException {
+    public User findOne(String id) throws ObjectNotFoundException {
         MongoCollection<Document> users = mongoClient.getDatabase("mongodb").getCollection("users");
         Document userDocument = Optional.ofNullable(users.find(new Document("id", id)).first()).orElseThrow(() -> {
-            logger.error("User with id: " + id + " is not found");
-            return new ObjectNotFoundException("User with id: " + id + " is not found");
+            log.error("User with id: {} is not found", id);
+            return new ObjectNotFoundException(String.format("User with id: %s is not found", id));
         });
         return User.getUserFromDocument(userDocument);
     }

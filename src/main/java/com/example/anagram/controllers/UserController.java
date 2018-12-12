@@ -21,13 +21,14 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping
+    public User getUser(@RequestParam String id) throws ObjectNotFoundException, IOException {
+        return userService.findOne(id);
+    }
+
     @PostMapping
     public void createUser(@RequestBody User user) throws JsonProcessingException {
         userService.saveOldStyle(user);
     }
 
-    @GetMapping
-    public User getUser(@RequestParam String id) throws ObjectNotFoundException, IOException {
-        return userService.findOne(id);
-    }
 }
