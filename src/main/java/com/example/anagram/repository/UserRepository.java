@@ -1,6 +1,6 @@
-package com.example.anagram.repositories;
+package com.example.anagram.repository;
 
-import com.example.anagram.models.User;
+import com.example.anagram.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

@@ -7,12 +7,16 @@ import com.mongodb.client.MongoDatabase;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.config.EnableMongoAuditing;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-
+//TODO check annotations
+//@EnableMongoAuditing
+//@EnableMongoRepositories
 public class MongoDbConfig {
     @Value("${spring.data.mongodb.host}")
     private String dbHost;

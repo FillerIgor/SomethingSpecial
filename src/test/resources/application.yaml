@@ -1,6 +1,12 @@
 spring:
-  profiles:
-    active: "dev"
   test:
     mockmvc:
       print: log_debug
+  data:
+    mongodb:
+      host: ${TEST_DB_HOST:dummy_host}
+      port: ${TEST_DB_PORT:27017}
+      database: ${TEST_DATABASE:dummy_db}
+application:
+  mongodb:
+    collections: test_collection

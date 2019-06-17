@@ -1,44 +1,38 @@
 package com.example.anagram.services;
 
+import com.example.anagram.service.StringCheckerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.mockito.InjectMocks;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
-@ActiveProfiles("dev")
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class)
+@RunWith(MockitoJUnitRunner.class)
 public class StringCheckerServiceTest {
-    @Autowired
-    private StringCheckerService stringCheckerService;
+
+    @InjectMocks
+    private StringCheckerService sut;
 
     @Test
-    public void isStringsAnagram() throws Exception {
+    public void shouldReturnTrueWhenStringIsAnagram() {
         //given
-        String firstString = "rail safety";
-        String secondString = "fairy tales";
+        final String firstString = "rail safety";
+        final String secondString = "fairy tales";
         //when
-        boolean result = stringCheckerService.isStringsAnagram(firstString, secondString);
+        boolean result = sut.isStringsAnagram(firstString, secondString);
         //then
         assertThat(result).isTrue();
     }
 
-    @Configuration
-    @EnableConfigurationProperties
-//    @Profile("prod")
-    static class TestConfig {
-        @Bean
-        StringCheckerService stringCheckerService() {
-            return new StringCheckerService();
-        }
+    @Test
+    public void shouldReturnFalseWhenStringIsNotAnagram() {
+        //given
+        final String firstString = "first string";
+        final String secondString = "second string";
+        //when
+        final boolean result = sut.isStringsAnagram(firstString, secondString);
+        //then
+        assertThat(result).isFalse();
     }
-
 }

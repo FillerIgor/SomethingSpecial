@@ -1,4 +1,4 @@
-package com.example.anagram.services;
+package com.example.anagram.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -14,13 +14,13 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Service
 @Slf4j
+@Service
 public class StringCheckerService {
 
     public boolean isStringsAnagram(String firstString, String secondString) {
-        Map<Character, Long> firstStringCharToAmount = firstString.chars().mapToObj(value -> (char) value).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        Map<Character, Long> secondStringCharToAmount = secondString.chars().mapToObj(value -> (char) value).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        final Map<Character, Long> firstStringCharToAmount = firstString.chars().mapToObj(value -> (char) value).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        final Map<Character, Long> secondStringCharToAmount = secondString.chars().mapToObj(value -> (char) value).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         return Objects.equals(firstStringCharToAmount, secondStringCharToAmount);
     }
 }
